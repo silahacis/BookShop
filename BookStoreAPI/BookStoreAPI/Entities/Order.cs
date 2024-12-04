@@ -4,16 +4,16 @@ using BookStoreAPI.Payments;
 
 namespace BookStoreAPI.Entities
 {
-    public class Order
+    public class Order 
     {
         //Atributes
         public int Id { get; set; }
-        public List<OrderItem> OrderItems { get; set; }
+        public List<BaseProduct> Products { get; set; }
         public double TotalAmount { get; set; }
         public Customer Customer { get; set; }
-        public virtual IOrderState State { get; set; }
+        public  IOrderState State { get; set; }
         public DateTime OrderDate { get; set; }
-        public virtual Invoice Invoice { get; set; }
-        public virtual PaymentStrategy PaymentStrategy { get; set; }
+        public  Invoice Invoice { get; set; }
+        public  IPaymentStrategy PaymentStrategy { get; set; }
     }
 }

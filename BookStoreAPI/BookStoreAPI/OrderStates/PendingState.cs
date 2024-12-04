@@ -2,7 +2,8 @@
 
 namespace BookStoreAPI.OrderStates
 {
-    public class PendingState : IOrderState
+    public class PendingState 
     {
+
     }
 }

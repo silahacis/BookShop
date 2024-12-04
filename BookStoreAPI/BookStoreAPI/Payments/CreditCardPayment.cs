@@ -1,6 +1,10 @@
 ﻿namespace BookStoreAPI.Payments
 {
-    public class CreditCardPayment
+    public class CreditCardPayment : IPaymentStrategy
     {
+        public void pay()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
