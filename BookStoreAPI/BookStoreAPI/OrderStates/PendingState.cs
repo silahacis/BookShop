@@ -1,6 +1,8 @@
-﻿namespace BookStoreAPI.OrderStates
+﻿using BookStoreAPI.Interfaces;
+
+namespace BookStoreAPI.OrderStates
 {
-    public class PendingState
+    public class PendingState : IOrderState
     {
     }
 }

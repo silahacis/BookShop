@@ -1,6 +1,7 @@
 ﻿namespace BookStoreAPI.Invoices
 {
-    abstract class Invoice
+    public abstract class Invoice
     {
+
     }
 }

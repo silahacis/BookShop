@@ -1,6 +1,6 @@
 ﻿namespace BookStoreAPI.Payments
 {
-    interface PaymentStrategy
+    public interface PaymentStrategy
     {
     }
 }

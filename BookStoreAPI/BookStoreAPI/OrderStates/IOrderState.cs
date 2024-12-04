@@ -4,8 +4,6 @@ namespace BookStoreAPI.Interfaces
 {
     public interface IOrderState
     {
-        //Atributes
-        string orderStatusInfo;
         //Methods
         void  processOrder();
         void shipOrder();
