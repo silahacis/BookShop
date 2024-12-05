@@ -5,6 +5,7 @@
         public override void GenerateInvoice(double amount)
         {
             InvoiceText = $"Generated a physical invoice for the order. Amount: ${amount}";
+            InvoiceDate = DateTime.Now;
         }
     }
 

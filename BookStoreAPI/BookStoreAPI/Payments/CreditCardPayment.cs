@@ -2,9 +2,10 @@
 {
     public class CreditCardPayment : IPaymentStrategy
     {
-        public void pay()
+        public string Pay(double amount)
         {
-            throw new NotImplementedException();
+            string message = $"Paid {amount:C} using Credit Card.";
+            return message;
         }
     }
 }

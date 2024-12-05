@@ -1,13 +1,13 @@
-﻿using System.Threading.RateLimiting;
+﻿using BookStoreAPI.Entities;
 
 namespace BookStoreAPI.Interfaces
 {
     public interface IOrderState
     {
         //Methods
-        void  processOrder();
-        void shipOrder();
-        void deliverOrder();
+        void  ProcessOrder(Order order);
+        void ShipOrder(Order order);
+        void DeliverOrder(Order order);
 
     }
 }

@@ -2,6 +2,6 @@
 {
     public interface IPaymentStrategy
     {
-        void pay();
+        string Pay(double amount);
     }
 }

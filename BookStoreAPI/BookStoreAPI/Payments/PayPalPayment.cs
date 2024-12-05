@@ -2,9 +2,11 @@
 {
     public class PayPalPayment : IPaymentStrategy
     {
-        public void pay()
+        public string Pay(double amount)
         {
-            throw new NotImplementedException();
+            string message = $"Paid {amount:C} using PayPal.";
+            Console.WriteLine(message);
+            return message;
         }
     }
 }
