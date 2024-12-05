@@ -1,6 +1,10 @@
 ﻿namespace BookStoreAPI.Payments
 {
-    public class PayPalPayment
+    public class PayPalPayment : IPaymentStrategy
     {
+        public void pay()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
