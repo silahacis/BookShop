@@ -7,14 +7,11 @@
         {
             order.ProcessOrder();
            
-
             Thread.Sleep(2000); 
             order.ShipOrder();
-            order.NotifyObservers();
 
             Thread.Sleep(2000);
             order.DeliverOrder();
-            order.NotifyObservers();
         }
     }
 }

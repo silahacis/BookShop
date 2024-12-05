@@ -20,20 +20,21 @@ namespace BookStoreAPI.OrderStates
 
         public void ProcessOrder(Order order)
         {
-            order.NotifyObservers();
+            throw new InvalidOperationException("Cannot process an order that has already been shipped.");
         }
+
 
         public void ShipOrder(Order order)
         {
-            order.OrderMessages.Add("Order is already shipped.");
-            order.NotifyObservers();
+            order.State = DeliveredState.Create();
+            var message = "Order is already shipped.";
+            order.NotifyObservers(message);
         }
 
         public void DeliverOrder(Order order)
-        {
-            order.State = DeliveredState.Create();
-            order.OrderMessages.Add("Order is delivered.");
-            order.NotifyObservers();
+        {  
+            var message = "Order is delivered.";
+            order.NotifyObservers(message);
         }
     }
 

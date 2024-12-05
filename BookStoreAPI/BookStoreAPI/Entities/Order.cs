@@ -63,7 +63,7 @@ public class Order : IObservable
         Observers.Remove(observer);
     }
 
-    public void NotifyObservers()
+    public void NotifyObservers(string orderStatusMessage)
     {
         foreach (var observer in Observers)
         {

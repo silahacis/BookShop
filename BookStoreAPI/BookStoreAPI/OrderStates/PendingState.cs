@@ -20,13 +20,15 @@ namespace BookStoreAPI.OrderStates
 
         public void ProcessOrder(Order order)
         {
-            order.OrderMessages.Add($"Order {order.Id} is pending and being processed.");
+            var message = $"Order {order.Id} is pending and being processed.";
+            order.NotifyObservers(message);
         }
 
         public void ShipOrder(Order order)
         {
             order.State = ShippedState.Create();
-            order.OrderMessages.Add("Order is now shipped.");
+            var message = $"Order {order.Id} is now shipped.";
+            order.NotifyObservers(message);
         }
 
         public void DeliverOrder(Order order)

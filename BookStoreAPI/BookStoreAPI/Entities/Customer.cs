@@ -13,11 +13,9 @@ namespace BookStoreAPI.Entities
         public string? Address { get; set; }
         public List<Order> Orders { get; set; } = new List<Order>();
 
-        public string OrderMessage { get; set; }
-
         public void Update(Order order)
         {
-            order.OrderMessages()
+            order.OrderMessages
         }
 
     }

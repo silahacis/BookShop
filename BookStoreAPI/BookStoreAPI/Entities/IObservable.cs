@@ -4,6 +4,6 @@
     {
         void Register(IObserver observer);
         void Unregister(IObserver observer);
-        void NotifyObservers();
+        void NotifyObservers(string orderStatusMessage);
     }
 }
