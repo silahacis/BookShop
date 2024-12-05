@@ -17,7 +17,7 @@ namespace BookStoreAPI.Entities
 
         public void Update(Order order)
         {
-            order.OrderMessages()
+            //order.OrderMessages();
         }
 
     }
