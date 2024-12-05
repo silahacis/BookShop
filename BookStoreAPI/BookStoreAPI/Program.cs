@@ -1,4 +1,5 @@
 using BookStoreAPI;
+using BookStoreAPI.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,14 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+//Repositories
+builder.Services.AddSingleton<CategoryRepository>();
+builder.Services.AddSingleton<BookRepository>();
+builder.Services.AddSingleton<CustomerRepository>();
+builder.Services.AddSingleton<OrderRepository>();
+
+
 
 var app = builder.Build();
 
