@@ -48,7 +48,6 @@ namespace BookStoreAPI.Repositories
                 existingCustomer.PhoneNumber = customer.PhoneNumber;
                 existingCustomer.Address = customer.Address;
                 existingCustomer.Orders = customer.Orders;
-                existingCustomer.OrderMessage = customer.OrderMessage;
             }
         }
 
