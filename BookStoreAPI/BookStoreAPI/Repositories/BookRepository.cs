@@ -1,6 +1,4 @@
 ﻿using BookStoreAPI.Entities;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace BookStoreAPI.Repositories
 {
@@ -19,7 +17,6 @@ namespace BookStoreAPI.Repositories
                     Title = "The Great Gatsby",
                     Author = "F. Scott Fitzgerald",
                     Price = 10.99,
-                    CreatedDate = DateTime.Now.AddMonths(-2),
                     Stock = 50,
                     Categories = new List<Category>
                     {
@@ -32,7 +29,6 @@ namespace BookStoreAPI.Repositories
                     Title = "A Brief History of Time",
                     Author = "Stephen Hawking",
                     Price = 15.99,
-                    CreatedDate = DateTime.Now.AddMonths(-5),
                     Stock = 20,
                     Categories = new List<Category>
                     {
@@ -44,9 +40,7 @@ namespace BookStoreAPI.Repositories
                     Id = 3,
                     Title = "Sapiens: A Brief History of Humankind",
                     Author = "Yuval Noah Harari",
-                    Price = 12.49,
-                    CreatedDate = DateTime.Now.AddMonths(-1),
-                    Stock = 35,
+                    Price = 12.49,                    Stock = 35,
                     Categories = new List<Category>
                     {
                         new Category { Id = 3, Name = "History" },
@@ -68,7 +62,6 @@ namespace BookStoreAPI.Repositories
         public void Add(Book book)
         {
             book.Id = _books.Max(b => b.Id) + 1;
-            book.CreatedDate = DateTime.Now;
             _books.Add(book);
         }
 
@@ -82,7 +75,6 @@ namespace BookStoreAPI.Repositories
                 existingBook.Price = book.Price;
                 existingBook.Stock = book.Stock;
                 existingBook.Categories = book.Categories;
-                existingBook.UpdatedDate = DateTime.Now;
             }
         }
 

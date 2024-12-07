@@ -12,6 +12,7 @@ public class Order : IObservable
     public int Id { get; set; }
     public List<Book> Books { get; set; }
     public double TotalAmount { get; set; }
+    public string OrderAddress { get; set; }
     public Customer Customer { get; set; }
     public DateTime OrderDate { get; set; }
     public string PaymentMessage { get; set; }
@@ -23,7 +24,7 @@ public class Order : IObservable
 
     private readonly List<IObserver> Observers = new();
 
-    public static CreateOrderResponse CreateOrder(List<Book> books, Customer customer, PaymentProcessor paymentProcessor, IInvoiceFactory invoiceFactory, InvoiceType invoiceType)
+    public static CreateOrderResponse CreateOrder(List<Book> books, Customer customer, PaymentProcessor paymentProcessor, IInvoiceFactory invoiceFactory, InvoiceType invoiceType, string orderAddress)
     {
         double totalAmount = books.Sum(book => book.Price);
 
@@ -36,6 +37,7 @@ public class Order : IObservable
             OrderDate = DateTime.Now,
             State = PendingState.Create(),
             PaymentStrategy = paymentProcessor.PaymentStrategy,
+            OrderAddress = orderAddress
         };
 
         Invoice invoice = invoiceFactory.CreateInvoice(invoiceType);
@@ -45,6 +47,7 @@ public class Order : IObservable
 
         string paymentMessage = paymentProcessor.ProcessPayment(totalAmount);
 
+        order.Register(order.Customer);
         return new CreateOrderResponse
         {
             Order = order,
@@ -67,7 +70,7 @@ public class Order : IObservable
     {
         foreach (var observer in Observers)
         {
-            observer.Update(this);
+            observer.Update(this, orderStatusMessage);
         }
     }
 

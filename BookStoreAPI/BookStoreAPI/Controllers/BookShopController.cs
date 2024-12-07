@@ -4,6 +4,7 @@ using BookStoreAPI.Requests;
 using BookStoreAPI.Responses;
 using BookStoreAPI.Payments;
 using BookStoreAPI.Invoices;
+using BookStoreAPI.Repositories;
 
 
 namespace BookStoreAPI.Controllers
@@ -12,6 +13,12 @@ namespace BookStoreAPI.Controllers
     [Route("api/[controller]")]
     public class BookShopController : ControllerBase
     {
+        private readonly CustomerRepository _repository;
+
+        public BookShopController(CustomerRepository repository)
+        {
+            _repository = repository;
+        }
         [HttpPost]
         public IActionResult CreateOrder([FromBody] CreateOrderRequest request)
         {
@@ -24,13 +31,15 @@ namespace BookStoreAPI.Controllers
             {
                 var invoiceFactory = new ConcreteInvoiceFactory();
                 var paymentProcessor = new PaymentProcessor(request.PaymentMethod);
+                var customer = _repository.GetById(request.CustomerId);
 
                 var response = Order.CreateOrder(
                     request.Books,
-                    request.Customer,
+                    customer,
                     paymentProcessor,
                     invoiceFactory,
-                    request.InvoiceType
+                    request.InvoiceType,
+                    request.OrderAddress
                 );
 
                 var orderSimulation = new OrderSimulation();

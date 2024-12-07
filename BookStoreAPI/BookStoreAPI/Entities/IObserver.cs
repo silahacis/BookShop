@@ -2,6 +2,6 @@
 {
     public interface IObserver
     {
-        void Update(Order order);
+        void Update(Order order, string orderStatusMessage);
     }
 }

@@ -15,6 +15,7 @@ namespace BookStoreAPI.OrderStates
             {
                 instance = new ShippedState();
             }
+            Console.WriteLine("Shipped state is created only once");
             return instance;
         }
 
@@ -26,14 +27,16 @@ namespace BookStoreAPI.OrderStates
 
         public void ShipOrder(Order order)
         {
-            order.State = DeliveredState.Create();
-            var message = "Order is already shipped.";
+            var message = $"Order {order.Id} is already shipped.";
+            Console.WriteLine(message);
             order.NotifyObservers(message);
         }
 
         public void DeliverOrder(Order order)
-        {  
-            var message = "Order is delivered.";
+        {
+            order.State = DeliveredState.Create();
+            var message = $"Order {order.Id} is delivered.";
+            Console.WriteLine();
             order.NotifyObservers(message);
         }
     }

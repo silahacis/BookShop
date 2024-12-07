@@ -15,12 +15,14 @@ namespace BookStoreAPI.OrderStates
             {
                 instance = new PendingState();
             }
+            Console.WriteLine("Pending state is created only once");
             return instance;
         }
 
         public void ProcessOrder(Order order)
         {
             var message = $"Order {order.Id} is pending and being processed.";
+            Console.WriteLine(message);
             order.NotifyObservers(message);
         }
 
@@ -28,6 +30,7 @@ namespace BookStoreAPI.OrderStates
         {
             order.State = ShippedState.Create();
             var message = $"Order {order.Id} is now shipped.";
+            Console.WriteLine(message);
             order.NotifyObservers(message);
         }
 

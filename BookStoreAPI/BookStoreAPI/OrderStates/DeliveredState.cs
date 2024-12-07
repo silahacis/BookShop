@@ -15,12 +15,13 @@ namespace BookStoreAPI.OrderStates
             {
                 instance = new DeliveredState();
             }
+            Console.WriteLine("Delivered state is created only once");
             return instance;
         }
 
         public void ProcessOrder(Order order)
         {
-            order.OrderMessages.Add("Order is already processed.");
+            throw new InvalidOperationException("Cannot process after delivery.");
         }
 
         public void ShipOrder(Order order)
@@ -30,7 +31,9 @@ namespace BookStoreAPI.OrderStates
 
         public void DeliverOrder(Order order)
         {
-            order.OrderMessages.Add("Order is already delivered.");
+            var message = $"Order {order.Id} is already delivered.";
+            Console.WriteLine(message);
+            order.NotifyObservers(message);
         }
     }
 

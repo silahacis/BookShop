@@ -1,6 +1,4 @@
 ﻿using BookStoreAPI.Entities;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace BookStoreAPI.Repositories
 {
@@ -21,8 +19,7 @@ namespace BookStoreAPI.Repositories
                     Email = "johndoe@example.com",
                     PhoneNumber = "123-456-7890",
                     Address = "123 Main Street",
-                    Orders = new List<Order>(),
-                    OrderMessage = "No orders yet."
+                    Orders = new List<Order>()
                 }
             };
         }
