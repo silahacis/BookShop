@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bookstore.bookstoreapp.R
 import com.bookstore.bookstoreapp.data.CartItem
@@ -27,6 +28,7 @@ class CartFragment : Fragment() {
 
     private lateinit var adapter: CartAdapter
     private lateinit var binding: FragmentCartBinding
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,13 +63,14 @@ class CartFragment : Fragment() {
             recyclerView.adapter = adapter
             updateTotalPrice(cartItems)
         }
-        binding.buttonOrder.setOnClickListener {
+        binding.buttonCheckout.setOnClickListener {
             val cartItems = cartViewModel.cartItems.value ?: emptyList()
             if (cartItems.isEmpty()) {
-                binding.buttonOrder.isEnabled = false
+                binding.buttonCheckout.isEnabled = false
                 return@setOnClickListener
             } else {
-                showOrderConfirmationDialog()
+                //showOrderConfirmationDialog()
+                findNavController().navigate(R.id.action_cartFragment_to_checkoutFragment)
             }
         }
     }
@@ -107,8 +110,6 @@ class CartFragment : Fragment() {
             val order = Order(orderId, orderDate, cartItems)
 
             val currentOrders = orderViewModel.orderItems.value?.toMutableList() ?: mutableListOf()
-            currentOrders.add(order)
-            orderViewModel.updateOrders(currentOrders)
             cartViewModel.clearCart()
             Toast.makeText(requireContext(), "Order placed successfully!", Toast.LENGTH_SHORT)
                 .show()

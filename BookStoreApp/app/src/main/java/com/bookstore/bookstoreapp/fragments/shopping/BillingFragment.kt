@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bookstore.bookstoreapp.R
+import com.bookstore.bookstoreapp.databinding.FragmentBillingBinding
 
 class BillingFragment : Fragment() {
 
+    private lateinit var binding : FragmentBillingBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -18,7 +20,9 @@ class BillingFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_billing, container, false)
+        binding = FragmentBillingBinding.inflate(inflater)
+        return binding.root
     }
+
+
 }

@@ -141,13 +141,13 @@
 
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/buttonOrder"
+            android:id="@+id/buttonCheckout"
             style="@style/blueButtonStyle"
             android:layout_width="0dp"
             android:layout_height="@dimen/mediumButtonHeight"
             android:layout_marginTop="45dp"
             android:layout_marginBottom="20dp"
-            android:text="Order"
+            android:text="Checkout"
             app:layout_constraintEnd_toEndOf="@id/rightGuideLine"
             app:layout_constraintStart_toStartOf="@id/leftGuideLine"
             app:layout_constraintTop_toBottomOf="@id/totalBoxContainer" />

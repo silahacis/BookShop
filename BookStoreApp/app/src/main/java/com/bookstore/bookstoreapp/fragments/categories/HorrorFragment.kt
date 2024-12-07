@@ -31,8 +31,6 @@ class HorrorFragment : BaseCategoryFragment() {
         return binding.root
     }
 
-    //comment
-    //comment
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // Fetch horror books
