@@ -1,5 +1,6 @@
 ﻿using BookStoreAPI.Entities;
 using BookStoreAPI.Repositories;
+using BookStoreAPI.Responses;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStoreAPI.Controllers
@@ -32,15 +33,28 @@ namespace BookStoreAPI.Controllers
         }
 
         [HttpGet("customer/{customerId}")]
-        public ActionResult<List<Order>> GetByCustomerId(int customerId)
+        public ActionResult<List<GetOrderResponse>> GetByCustomerId(int customerId)
         {
             var orders = _repository.GetByCustomerId(customerId);
 
             if (orders == null || orders.Count == 0)
                 return NotFound(new { Message = $"No orders found for customer with ID {customerId}." });
 
-            return orders;
+            var orderResponses = orders.Select(order => new GetOrderResponse
+            {
+                Id = order.Id,
+                Books = order.Books,
+                TotalAmount = order.Books.Sum(book => book.Price),
+                OrderAddress = order.OrderAddress,
+                OrderDate = order.OrderDate,
+                OrderMessages = order.OrderMessages,
+                InvoiceType = order.Invoice.GetType().Name, 
+                PaymentMethod = order.PaymentStrategy.GetType().Name 
+            }).ToList();
+
+            return orderResponses;
         }
+
 
 
         [HttpPost]

@@ -107,8 +107,6 @@ class CartFragment : Fragment() {
             val order = Order(orderId, orderDate, cartItems)
 
             val currentOrders = orderViewModel.orderItems.value?.toMutableList() ?: mutableListOf()
-            currentOrders.add(order)
-            orderViewModel.updateOrders(currentOrders)
             cartViewModel.clearCart()
             Toast.makeText(requireContext(), "Order placed successfully!", Toast.LENGTH_SHORT)
                 .show()

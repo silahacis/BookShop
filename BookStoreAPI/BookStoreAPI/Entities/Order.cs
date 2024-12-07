@@ -15,9 +15,7 @@ public class Order : IObservable
     public string OrderAddress { get; set; }
     public Customer Customer { get; set; }
     public DateTime OrderDate { get; set; }
-    public string PaymentMessage { get; set; }
     public List<string> OrderMessages { get; set; } = new List<string>();
-    public string OrderStatus { get; set; }
     public IOrderState State { get; set; }
     public virtual Invoice Invoice { get; set; }
     public virtual IPaymentStrategy PaymentStrategy { get; set; }

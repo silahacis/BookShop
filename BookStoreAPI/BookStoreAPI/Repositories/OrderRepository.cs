@@ -24,34 +24,35 @@ namespace BookStoreAPI.Repositories
 
             // Initialize with dummy data
             _orders = new List<Order>
-            {
-                new Order
                 {
-                    Id = 1001,
-                    Books = new List<Book> { books[0], books[1] },
-                    TotalAmount = books[0].Price + books[1].Price,
-                    Customer = customer,
-                    OrderDate = DateTime.Now.AddDays(-10),
-                    OrderStatus = "Pending",
-                    PaymentMessage = "Payment pending",
-                    State = PendingState.Create(),
-                    Invoice = new DigitalInvoice(),
-                    PaymentStrategy = new CreditCardPayment()
-                },
-                new Order
-                {
-                    Id = 1002,
-                    Books = new List<Book> { books[1], books[2] },
-                    TotalAmount = books[1].Price + books[2].Price,
-                    Customer = customer,
-                    OrderDate = DateTime.Now.AddDays(-5),
-                    OrderStatus = "Processed",
-                    PaymentMessage = "Payment processed successfully",
-                    State = ShippedState.Create(),
-                    Invoice = new PhysicalInvoice(),
-                    PaymentStrategy = new PayPalPayment()
-                }
-            };
+                    new Order
+                    {
+                        Id = 1001,
+                        Books = new List<Book> { books[0], books[1] },
+                        TotalAmount = books[0].Price + books[1].Price,
+                        Customer = customer,
+                        OrderDate = DateTime.Now.AddDays(-10),
+                        State = PendingState.Create(),
+                        Invoice = new DigitalInvoice(),
+                        OrderMessages = new List<string> {"Order 1001 is pending and being processed.","Order 1001 is now shipped.","Order 1001 is delivered." },
+                        OrderAddress = "street: 123 Elm Street, city: Springfield, state: IL, zipCode: 62701, country: USA",
+                        PaymentStrategy = new CreditCardPayment()
+                    },
+                    new Order
+                    {
+                        Id = 1002,
+                        Books = new List<Book> { books[1], books[2] },
+                        TotalAmount = books[1].Price + books[2].Price,
+                        Customer = customer,
+                        OrderDate = DateTime.Now.AddDays(-5),
+                        State = ShippedState.Create(),
+                        OrderMessages = new List<string> {"Order 1002 is pending and being processed.","Order 1002 is now shipped.","Order 1002 is delivered." }, 
+                        OrderAddress = "street: 123 Elm Street, city: Springfield, state: IL, zipCode: 62701, country: USA",
+                        Invoice = new PhysicalInvoice(),
+                        PaymentStrategy = new PayPalPayment()
+                    }
+                };
+
         }
 
         public List<Order> GetAll() => _orders;
@@ -78,8 +79,6 @@ namespace BookStoreAPI.Repositories
                 existingOrder.Books = order.Books;
                 existingOrder.TotalAmount = order.TotalAmount;
                 existingOrder.Customer = order.Customer;
-                existingOrder.OrderStatus = order.OrderStatus;
-                existingOrder.PaymentMessage = order.PaymentMessage;
                 existingOrder.Invoice = order.Invoice;
                 existingOrder.PaymentStrategy = order.PaymentStrategy;
             }
