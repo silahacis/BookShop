@@ -22,6 +22,7 @@ class HorrorFragment : BaseCategoryFragment() {
         super.onCreate(savedInstanceState)
     }
 
+    //comment
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -30,6 +31,7 @@ class HorrorFragment : BaseCategoryFragment() {
         return binding.root
     }
 
+    //comment
     //comment
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
