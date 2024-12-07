@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">BookStoreApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="rightAddress">Best Choise for Buying Books</string>
+    <string name="price_format">%s</string>
+    <string name="error_product_not_found">Product not found.</string>
+</resources>
