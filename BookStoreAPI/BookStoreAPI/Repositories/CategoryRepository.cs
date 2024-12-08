@@ -10,7 +10,6 @@ namespace BookStoreAPI.Repositories
 
         public CategoryRepository()
         {
-            // Dummy data
             _categories = new List<Category>
             {
                 new Category { Id = 1, Name = "Fiction" },

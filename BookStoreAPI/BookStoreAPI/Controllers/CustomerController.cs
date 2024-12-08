@@ -1,7 +1,6 @@
 ﻿using BookStoreAPI.Entities;
 using BookStoreAPI.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 
 namespace BookStoreAPI.Controllers
 {
@@ -17,10 +16,6 @@ namespace BookStoreAPI.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<Customer>> GetAll()
-        {
-            return _repository.GetAll();
-        }
 
         [HttpGet("{id}")]
         public ActionResult<Customer> GetById(int id)

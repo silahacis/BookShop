@@ -21,6 +21,7 @@ class CartAdapter(
         val tvCartProductQuantity: TextView = itemView.findViewById(R.id.tvCartProductQuantity)
         val imagePlus: ImageView = itemView.findViewById(R.id.imagePlus)
         val imageMinus: ImageView = itemView.findViewById(R.id.imageMinus)
+        val authorName : TextView? = itemView.findViewById(R.id.tvAuthorName)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
@@ -33,6 +34,7 @@ class CartAdapter(
         holder.imageView.setImageResource(item.imageResId)
         holder.productName.text = item.name
         holder.productPrice.text = "${item.price}₺"
+        holder.authorName?.text = item.authorName
         holder.tvCartProductQuantity.text = item.quantity.toString()
 
         holder.imagePlus.setOnClickListener {
@@ -42,7 +44,6 @@ class CartAdapter(
             if (item.quantity > 1) {
                 onDecreaseQuantity(item)
             } else {
-                // Remove item if quantity is 1
                 onRemoveFromCart(item)
             }
         }

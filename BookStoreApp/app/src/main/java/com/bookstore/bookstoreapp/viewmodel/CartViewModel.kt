@@ -1,19 +1,3 @@
-//import androidx.lifecycle.LiveData
-//import androidx.lifecycle.MutableLiveData
-//import androidx.lifecycle.ViewModel
-//import com.bookstore.bookstoreapp.data.CartItem
-//import com.bookstore.bookstoreapp.helper.CartRepository
-//
-//class CartViewModel : ViewModel() {
-//    private val _cartItems = MutableLiveData<MutableList<CartItem>>(mutableListOf())
-//    val cartItems: LiveData<MutableList<CartItem>> = _cartItems
-//
-//    fun addToCart(item: CartItem) {
-//        _cartItems.value?.add(item)
-//        _cartItems.value = _cartItems.value // Trigger observer
-//    }
-//}
-
 package com.bookstore.bookstoreapp.viewmodel
 
 import android.app.Application

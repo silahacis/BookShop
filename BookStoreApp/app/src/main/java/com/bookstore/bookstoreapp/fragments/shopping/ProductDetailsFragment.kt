@@ -54,6 +54,7 @@ class ProductDetailsFragment : Fragment() {
                     bookID = it.bookId,
                     imageResId = it.imageRes,
                     name = it.title,
+                    authorName = it.author,
                     price = it.price.toDouble(),
                     quantity = 1
                 )

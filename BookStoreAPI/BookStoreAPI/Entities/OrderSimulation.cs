@@ -3,15 +3,18 @@
     public class OrderSimulation
     {
         public OrderSimulation() {}
-        public void SimulateOrderProcess(Order order)
+        public async Task SimulateOrderProcessAsync(Order order)
         {
             order.ProcessOrder();
-           
-            Thread.Sleep(2000); 
+
+            await Task.Delay(5000);
+
             order.ShipOrder();
 
-            Thread.Sleep(2000);
+            await Task.Delay(5000); 
+
             order.DeliverOrder();
         }
+
     }
 }

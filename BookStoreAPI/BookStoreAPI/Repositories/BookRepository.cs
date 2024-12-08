@@ -8,7 +8,6 @@ namespace BookStoreAPI.Repositories
 
         public BookRepository()
         {
-            // Initialize with dummy data
             _books = new List<Book>
             {
                 new Book

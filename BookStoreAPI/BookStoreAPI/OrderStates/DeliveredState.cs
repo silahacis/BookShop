@@ -15,7 +15,6 @@ namespace BookStoreAPI.OrderStates
             {
                 instance = new DeliveredState();
             }
-            Console.WriteLine("Delivered state is created only once");
             return instance;
         }
 

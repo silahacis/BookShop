@@ -6,8 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.navigation.fragment.findNavController
+import com.bookstore.bookstoreapp.R
 import com.bookstore.bookstoreapp.activities.RetrofitClient
-import com.bookstore.bookstoreapp.activities.models.ApiResponse
 import com.bookstore.bookstoreapp.activities.models.Order
 import com.bookstore.bookstoreapp.adapters.OrderAdapter
 import com.bookstore.bookstoreapp.databinding.FragmentOrderBinding
@@ -31,36 +32,36 @@ class OrderFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val recyclerView = binding.rvAllOrders
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvAllOrders.layoutManager = LinearLayoutManager(requireContext())
 
-        // Adapter'i başlat ve RecyclerView'e ata
+        // Initialize adapter with click listener
         orderAdapter = OrderAdapter(emptyList()) { order ->
-            // Click işlemleri burada olacak
+            navigateToOrderDetails(order.id)
         }
-        recyclerView.adapter = orderAdapter
+        binding.rvAllOrders.adapter = orderAdapter
+    }
 
+    override fun onResume() {
+        super.onResume()
+        // Fetch orders whenever the fragment is resumed
         fetchOrders()
     }
 
+
+
     private fun fetchOrders() {
         val apiService = RetrofitClient.instance
-        val customerId = 1 // Örnek müşteri ID'si
-        val call = apiService.getOrdersByCustomerId(customerId)
-
-        call.enqueue(object : Callback<List<Order>> {
+        val customerId = 1
+        apiService.getOrdersByCustomerId(customerId).enqueue(object : Callback<List<Order>> {
             override fun onResponse(call: Call<List<Order>>, response: Response<List<Order>>) {
                 if (response.isSuccessful) {
                     val orders = response.body()
-                    println("Orders: $orders")
                     if (!orders.isNullOrEmpty()) {
                         binding.tvEmptyOrders.visibility = View.GONE
                         orderAdapter.updateOrders(orders)
                     } else {
                         binding.tvEmptyOrders.visibility = View.VISIBLE
                     }
-                } else {
-                    println("Error: ${response.code()}")
                 }
             }
 
@@ -68,5 +69,14 @@ class OrderFragment : Fragment() {
                 println("Failed to fetch orders: ${t.message}")
             }
         })
+    }
+
+    private fun navigateToOrderDetails(orderId: Int) {
+        val bundle = Bundle().apply {
+            putInt("ORDER_ID", orderId)
+        }
+
+        // Use NavController to navigate to OrderDetailsFragment
+        findNavController().navigate(R.id.action_orderFragment_to_billingFragment, bundle)
     }
 }

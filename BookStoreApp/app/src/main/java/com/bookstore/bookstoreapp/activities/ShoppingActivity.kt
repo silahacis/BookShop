@@ -19,7 +19,6 @@ class ShoppingActivity : AppCompatActivity() {
     private lateinit var cartViewModel: CartViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //enableEdgeToEdge()
         setContentView(binding.root)
 
         cartViewModel = ViewModelProvider(this)[CartViewModel::class.java]

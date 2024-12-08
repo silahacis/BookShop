@@ -37,7 +37,25 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:text="Date: --/--/---- --:--"
-        tools:text="Date: 07-12-2024 14:45" />
+        tools:text="Date: 08-12-2024 15:45" />
+
+    <!-- Payment Type -->
+    <TextView
+        android:id="@+id/tvPaymentType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Payment Type: "
+        tools:text="Payment Type: Credit Card" />
+
+    <!-- Invoice Type -->
+    <TextView
+        android:id="@+id/tvInvoiceType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Invoice Type: "
+        tools:text="Invoice Type: Digital" />
 
     <!-- Divider -->
     <View
@@ -46,4 +64,10 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:background="@android:color/darker_gray" />
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </LinearLayout>

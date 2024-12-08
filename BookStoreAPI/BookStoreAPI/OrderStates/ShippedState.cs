@@ -15,7 +15,6 @@ namespace BookStoreAPI.OrderStates
             {
                 instance = new ShippedState();
             }
-            Console.WriteLine("Shipped state is created only once");
             return instance;
         }
 

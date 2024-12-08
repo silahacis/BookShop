@@ -1,10 +1,9 @@
-﻿using BookStoreAPI.OrderStates;
+﻿using BookStoreAPI.Interfaces;
 
 namespace BookStoreAPI.Entities
 {
     public class Customer : IObserver
     {
-        //Atributes
         public int Id { get; set; }
         public string? Name { get; set; }
         public string? Password { get; set; }
@@ -16,11 +15,6 @@ namespace BookStoreAPI.Entities
         public void Update(Order order, string message)
         {
             order.OrderMessages.Add(message);
-            Console.WriteLine("Güncellenmiş Mesaj Listesi:");
-            foreach (var msg in order.OrderMessages)
-            {
-                Console.WriteLine($"- {msg}");
-            }
         }
 
     }

@@ -1,8 +1,4 @@
 ﻿using BookStoreAPI.Entities;
-using BookStoreAPI.Interfaces;
-using BookStoreAPI.Invoices;
-using BookStoreAPI.Payments;
-
 namespace BookStoreAPI.Responses
 {
     public class GetOrderResponse

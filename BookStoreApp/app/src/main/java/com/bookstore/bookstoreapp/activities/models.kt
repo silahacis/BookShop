@@ -1,8 +1,8 @@
 package com.bookstore.bookstoreapp.activities.models
 
 data class ApiResponse(
-    val status: String,
-    val data: List<Order>
+    val message: String,
+    val success: Boolean
 )
 
 data class Book(
@@ -30,7 +30,12 @@ data class Order(
     val paymentMethod: String
 )
 
-data class GetOrderOrderId(
-    val order: Order
+data class CreateOrderRequest(
+    val books: List<Book>,
+    val customerId: Int,
+    val paymentMethod: String,
+    val orderAddress: String,
+    val invoiceType: Int
 )
+
 

@@ -1,4 +1,6 @@
-﻿namespace BookStoreAPI.Entities
+﻿using BookStoreAPI.Entities;
+
+namespace BookStoreAPI.Interfaces
 {
     public interface IObserver
     {

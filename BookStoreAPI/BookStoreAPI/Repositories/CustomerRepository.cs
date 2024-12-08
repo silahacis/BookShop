@@ -8,7 +8,6 @@ namespace BookStoreAPI.Repositories
 
         public CustomerRepository()
         {
-            // Initialize with dummy data
             _customers = new List<Customer>
             {
                 new Customer
@@ -24,7 +23,6 @@ namespace BookStoreAPI.Repositories
             };
         }
 
-        public List<Customer> GetAll() => _customers;
 
         public Customer? GetById(int id) => _customers.FirstOrDefault(c => c.Id == id);
 

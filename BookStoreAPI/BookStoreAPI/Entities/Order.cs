@@ -8,7 +8,6 @@ using BookStoreAPI.Responses;
 namespace BookStoreAPI.Entities;
 public class Order : IObservable
 {
-    //Atributes
     public int Id { get; set; }
     public List<Book> Books { get; set; }
     public double TotalAmount { get; set; }
@@ -48,10 +47,7 @@ public class Order : IObservable
         order.Register(order.Customer);
         return new CreateOrderResponse
         {
-            Order = order,
-            PaymentMethodMessage = paymentMessage,
-            InvoiceDate = invoice.InvoiceDate,
-            InvoiceText = invoice.InvoiceText,
+            Order = order
         };
     }
     public void Register(IObserver observer)

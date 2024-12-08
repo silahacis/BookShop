@@ -1,5 +1,7 @@
 ﻿using BookStoreAPI.Entities;
+using BookStoreAPI.Payments;
 using BookStoreAPI.Repositories;
+using BookStoreAPI.Requests;
 using BookStoreAPI.Responses;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,23 +11,85 @@ namespace BookStoreAPI.Controllers
     [Route("api/[controller]")]
     public class OrdersController : ControllerBase
     {
-        private readonly OrderRepository _repository;
-
-        public OrdersController(OrderRepository repository)
+        private readonly OrderRepository _orderRepository;
+        private readonly CustomerRepository _customerRepository;
+        public OrdersController(OrderRepository repository, CustomerRepository customerRepository)
         {
-            _repository = repository;
+            _orderRepository = repository;
+            _customerRepository = customerRepository;
+        }
+
+        [HttpPost]
+        public IActionResult CreateOrder([FromBody] CreateOrderRequest request)
+        {
+            if (request == null || request.Books == null || !request.Books.Any())
+            {
+                return BadRequest("Invalid order data.");
+            }
+
+            try
+            {
+                var invoiceFactory = new ConcreteInvoiceFactory();
+                var paymentProcessor = new PaymentProcessor(request.PaymentMethod);
+                var customer = _customerRepository.GetById(request.CustomerId);
+
+                if (customer == null)
+                {
+                    return NotFound("Customer not found.");
+                }
+
+                var response = Order.CreateOrder(
+                    request.Books,
+                    customer,
+                    paymentProcessor,
+                    invoiceFactory,
+                    request.InvoiceType,
+                    request.OrderAddress
+                );
+
+                _orderRepository.Add(response.Order);
+
+                return Ok(response.Order);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+
+        [HttpPost("{id}/simulate")]
+        public async Task<IActionResult> SimulateOrder(int id)
+        {
+            var order = _orderRepository.GetById(id);
+            if (order == null)
+            {
+                return NotFound($"Order with ID {id} not found.");
+            }
+
+            try
+            {
+                var orderSimulation = new OrderSimulation();
+                await orderSimulation.SimulateOrderProcessAsync(order);
+
+                return Ok($"Order with ID {id} has been successfully simulated.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
         [HttpGet]
         public ActionResult<List<Order>> GetAll()
         {
-            return _repository.GetAll();
+            return _orderRepository.GetAll();
         }
 
         [HttpGet("{id}")]
         public ActionResult<Order> GetById(int id)
         {
-            var order = _repository.GetById(id);
+            var order = _orderRepository.GetById(id);
             if (order == null)
                 return NotFound();
 
@@ -35,7 +99,7 @@ namespace BookStoreAPI.Controllers
         [HttpGet("customer/{customerId}")]
         public ActionResult<List<GetOrderResponse>> GetByCustomerId(int customerId)
         {
-            var orders = _repository.GetByCustomerId(customerId);
+            var orders = _orderRepository.GetByCustomerId(customerId);
 
             if (orders == null || orders.Count == 0)
                 return NotFound(new { Message = $"No orders found for customer with ID {customerId}." });
@@ -56,28 +120,10 @@ namespace BookStoreAPI.Controllers
         }
 
 
-
-        [HttpPost]
-        public IActionResult Add(Order order)
-        {
-            _repository.Add(order);
-            return CreatedAtAction(nameof(GetById), new { id = order.Id }, order);
-        }
-
-        [HttpPut("{id}")]
-        public IActionResult Update(int id, Order order)
-        {
-            if (id != order.Id)
-                return BadRequest();
-
-            _repository.Update(order);
-            return NoContent();
-        }
-
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            _repository.Delete(id);
+            _orderRepository.Delete(id);
             return NoContent();
         }
     }

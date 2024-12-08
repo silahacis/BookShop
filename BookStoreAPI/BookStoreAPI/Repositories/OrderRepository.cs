@@ -15,14 +15,12 @@ namespace BookStoreAPI.Repositories
 
         public OrderRepository(BookRepository bookRepository, CustomerRepository customerRepository)
         {
-            // Get sample books and customers for order initialization
             var books = bookRepository.GetAll();
             var customer = customerRepository.GetById(1);
 
             if (customer == null)
                 throw new Exception("No sample customer found for orders.");
 
-            // Initialize with dummy data
             _orders = new List<Order>
                 {
                     new Order

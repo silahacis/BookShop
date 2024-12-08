@@ -15,7 +15,6 @@ namespace BookStoreAPI.OrderStates
             {
                 instance = new PendingState();
             }
-            Console.WriteLine("Pending state is created only once");
             return instance;
         }
 

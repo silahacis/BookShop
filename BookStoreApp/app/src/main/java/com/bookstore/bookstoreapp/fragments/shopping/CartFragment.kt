@@ -16,15 +16,9 @@ import com.bookstore.bookstoreapp.data.CartItem
 import com.bookstore.bookstoreapp.data.Order
 import com.bookstore.bookstoreapp.databinding.FragmentCartBinding
 import com.bookstore.bookstoreapp.viewmodel.CartViewModel
-import com.bookstore.bookstoreapp.viewmodel.OrderViewModel
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
-import java.util.UUID
 
 class CartFragment : Fragment() {
     private val cartViewModel: CartViewModel by activityViewModels()
-    private val orderViewModel: OrderViewModel by activityViewModels()
 
     private lateinit var adapter: CartAdapter
     private lateinit var binding: FragmentCartBinding
@@ -93,28 +87,10 @@ class CartFragment : Fragment() {
             .setTitle("Order Confirmation")
             .setMessage("Do you want to place the order?")
             .setPositiveButton("Yes") { _, _ ->
-                placeOrder()
             }
             .setNegativeButton("No") { dialog, _ ->
                 dialog.dismiss()
             }
             .show()
-    }
-
-
-    private fun placeOrder() {
-        val cartItems = cartViewModel.cartItems.value ?: emptyList()
-        if (cartItems.isNotEmpty()) {
-            val orderId = UUID.randomUUID().toString()
-            val orderDate = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(Date())
-            val order = Order(orderId, orderDate, cartItems)
-
-            val currentOrders = orderViewModel.orderItems.value?.toMutableList() ?: mutableListOf()
-            cartViewModel.clearCart()
-            Toast.makeText(requireContext(), "Order placed successfully!", Toast.LENGTH_SHORT)
-                .show()
-        } else {
-            Toast.makeText(requireContext(), "Cart is empty!", Toast.LENGTH_SHORT).show()
-        }
     }
 }
