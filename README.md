@@ -55,7 +55,7 @@ Used in **Invoice Generation**:
 
 ## 🧩 UML Diagram
 
-![UML Diagram](./uml-diagram.png)
+![UML Diagram](./UmlDiagram.png)
 
 > Make sure to place the UML diagram image (`uml-diagram.png`) in the root directory of the project or adjust the path accordingly.
 
